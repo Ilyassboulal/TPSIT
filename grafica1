@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadrati Colorati</title>
+    <style>
+        .quadrato {
+            width: 10px;
+            height: 10px;
+            border: 1px solid black;
+            display: inline-block;
+            margin: 5px; /* Aggiunge uno spazio tra i quadrati */
+        }
+
+        #quadrato1 { background-color: red; }
+        #quadrato2 { background-color: blue; }
+        #quadrato3 { background-color: green; }
+        #quadrato4 { background-color: yellow; }
+        #quadrato5 { background-color: orange; }
+        #quadrato6 { background-color: purple; }
+        #quadrato7 { background-color: pink; }
+        #quadrato8 { background-color: brown; }
+        #quadrato9 { background-color: cyan; }
+        #quadrato10 { background-color: gray; }
+    </style>
+</head>
+<body>
+    <div id="quadrato1" class="quadrato"></div>
+    <div id="quadrato2" class="quadrato"></div>
+    <div id="quadrato3" class="quadrato"></div>
+    <div id="quadrato4" class="quadrato"></div>
+    <div id="quadrato5" class="quadrato"></div>
+    <div id="quadrato6" class="quadrato"></div>
+    <div id="quadrato7" class="quadrato"></div>
+    <div id="quadrato8" class="quadrato"></div>
+    <div id="quadrato9" class="quadrato"></div>
+    <div id="quadrato10" class="quadrato"></div>
+</body>
+</html>
