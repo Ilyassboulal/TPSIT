@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadrati 10x10</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            width: 14px;
+            height: 14px;
+            border: 2px solid black;
+            margin: 2px;
+        }
+
+        .grigio-chiaro {
+            background-color: #f0f0f0;
+        }
+
+        .grigio-scuro {
+            background-color: #bfbfbf;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tbody>
+            <?php
+            $numQuadratiPerRiga = 10;
+
+            for ($i = 1; $i <= 100; $i++) {
+                // Calcola se il numero è pari o dispari
+                $pari = $i % 2 == 0;
+
+                // Calcola il colore dello sfondo in base alla parità del numero
+                $sfondoClasse = $pari ? 'grigio-chiaro' : 'grigio-scuro';
+
+                // Inserisce una nuova riga ogni 10 quadrati
+                if (($i - 1) % $numQuadratiPerRiga == 0) {
+                    echo '<tr>';
+                }
+
+                // Stampa il quadrato nella cella della tabella
+                echo "<td class='$sfondoClasse'></td>";
+
+                // Chiude la riga ogni 10 quadrati
+                if ($i % $numQuadratiPerRiga == 0) {
+                    echo '</tr>';
+                }
+            }
+            ?>
+        </tbody>
+    </table>
+</body>
+</html>
