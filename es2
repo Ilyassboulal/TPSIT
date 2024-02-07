@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convertitore Voti</title>
+</head>
+<body>
+  <h1>Convertitore Voti</h1>
+  <label for="voto1">Voto 1 (decimi):</label>
+  <input type="number" id="voto1">
+  <br>
+  <label for="voto2">Voto 2 (decimi):</label>
+  <input type="number" id="voto2">
+  <br>
+  <label for="voto3">Voto 3 (decimi):</label>
+  <input type="number" id="voto3">
+  <br>
+  <label for="voto4">Voto 4 (decimi):</label>
+  <input type="number" id="voto4">
+  <br>
+  <label for="voto5">Voto 5 (decimi):</label>
+  <input type="number" id="voto5">
+  <br>
+  <button onclick="convertiEVoti()">Converti e Trova il Voto Minimo</button>
+
+  <p>Risultati:</p>
+  <p>Voti in trentesimi: <span id="votiTrentesimi"></span></p>
+  <p>Voto minimo: <span id="votoMinimo"></span></p>
+
+  <script>
+    function convertiEVoti() {
+      const voto1 = parseFloat(document.getElementById('voto1').value);
+      const voto2 = parseFloat(document.getElementById('voto2').value);
+      const voto3 = parseFloat(document.getElementById('voto3').value);
+      const voto4 = parseFloat(document.getElementById('voto4').value);
+      const voto5 = parseFloat(document.getElementById('voto5').value);
+
+      const votoTrentesimi1 = voto1 * 3;
+      const votoTrentesimi2 = voto2 * 3;
+      const votoTrentesimi3 = voto3 * 3;
+      const votoTrentesimi4 = voto4 * 3;
+      const votoTrentesimi5 = voto5 * 3;
+
+      const votiTrentesimi = [votoTrentesimi1, votoTrentesimi2, votoTrentesimi3, votoTrentesimi4, votoTrentesimi5];
+      const votoMinimo = minimo(votiTrentesimi);
+
+      document.getElementById('votiTrentesimi').textContent = votiTrentesimi.join(', ');
+      document.getElementById('votoMinimo').textContent = votoMinimo;
+    }
+
+    function minimo(voti) {
+      let min = voti[0];
+      for (let i = 1; i < voti.length; i++) {
+        if (voti[i] < min) {
+          min = voti[i];
+        }
+      }
+      return min;
+    }
+  </script>
+</body>
+</html>
