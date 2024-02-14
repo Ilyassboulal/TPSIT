@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contatore con cambio di colore</title>
+<style>
+  #counter {
+    width: 200px;
+    height: 200px;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    font-weight: bold;
+    color: white;
+    transition: background-color 0.5s ease;
+  }
+</style>
+</head>
+<body>
+
+<div id="counter">0</div>
+
+<script>
+  var counter = document.getElementById("counter");
+  var count = 0;
+
+  function incrementCounter() {
+    count++;
+    if (count <= 1000) {
+      counter.textContent = count;
+      if (count % 10 === 0) {
+        changeColor();
+      }
+    }
+  }
+
+  function changeColor() {
+    var baseColor = '#ff0000'; // Colore base (rosso) per Pantone
+    var increment = Math.floor(0xffffff / 1000); // Incremento per rendere il colore simile a Pantone
+    var currentColor = parseInt(baseColor.substring(1), 16); // Converti il colore base in un numero esadecimale
+    currentColor += increment; // Incrementa il colore
+    var newColor = '#' + currentColor.toString(16); // Converti il nuovo colore in formato esadecimale
+    counter.style.backgroundColor = newColor;
+  }
+
+  // Avvio del contatore
+  setInterval(incrementCounter, 500);
+</script>
+
+</body>
+</html>
