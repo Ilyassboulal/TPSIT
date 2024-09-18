@@ -36,6 +36,7 @@
     <h1>Generatore di Numeri Casuali</h1>
     <button id="generate-button">Genera Numero Casuale</button>
     <div id="numbers"></div>
+    <div id="even-or-odd" class="box"></div>
 
     <script>
         // Funzione per generare un numero casuale tra 1 e 100
@@ -51,22 +52,18 @@
         // Funzione per aggiornare il contenuto della pagina con il numero casuale
         function updateNumbers() {
             const numbersDiv = document.getElementById('numbers');
+            const evenOrOddDiv = document.getElementById('even-or-odd');
             const randomNumber = getRandomNumber();
             const evenOrOdd = isEvenOrOdd(randomNumber);
 
             // Aggiorna il contenuto della div con il numero casuale
             numbersDiv.textContent = `Numero Casuale: ${randomNumber}`;
 
-            // Crea un nuovo box con la scritta "pari" o "dispari"
-            const box = document.createElement('div');
-            box.className = 'box';
-            box.textContent = evenOrOdd;
-
-            // Aggiunge il box sotto il numero
-            numbersDiv.appendChild(box);
+            // Aggiorna il contenuto della div con la scritta "pari" o "dispari"
+            evenOrOddDiv.textContent = evenOrOdd;
         }
 
-        // Aggiunge un event listener al pulsante per rilevare il click
+        // Aggiungi un event listener al bottone per generare un numero casuale
         document.getElementById('generate-button').addEventListener('click', updateNumbers);
     </script>
 </body>
