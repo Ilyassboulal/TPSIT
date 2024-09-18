@@ -1,0 +1,53 @@
+<html lang="en">
+
+<!-- dichiarazione del tipo di documento html5 e specifica della lingua del documento come inglese -->
+<head>
+   
+<meta charset="UTF-8"/>
+   
+<!-- dichiarazione del set di caratteri, utf-8 &egrave; lo standard per supportare una vasta gamma di caratteri -->
+   
+<meta name="viewport" content="width=device-width," initial-scale="1.0"/>
+   
+<!-- impostazione del viewport per garantire che il layout sia responsivo sui dispositivi mobili -->
+   <title>Generatore di Numeri Casuali</title>    
+<!-- titolo della pagina che apparir&agrave; nella scheda del browser -->
+   
+<style>
+        body {             font-family: Arial, sans-serif;             text-align: center;             margin: 20px;         }         /* Stile per il corpo della pagina: carattere Arial, centrato e con margine */         #numbers {             margin-top: 20px;             font-size: 24px;             font-weight: bold;         }         /* Stile per la div che mostrer&agrave; i numeri: margine superiore, dimensione del testo e font in grassetto */         #generate-button {             padding: 10px 20px;             font-size: 16px;             cursor: pointer;         }         /* Stile per il pulsante: padding per spazio interno, dimensione del font e cambio del cursore al passaggio del mouse */    
+</style>
+
+</!-->
+
+<body>
+   
+<h1>
+Generatore di Numeri Casuali
+</h1>
+   
+<!-- titolo principale della pagina -->
+   
+<button id="generate-button">
+Genera Numero Casuale
+</button>
+   
+<!-- pulsante per generare un numero casuale, identificato con l'id "generate-button" -->
+   
+<div id="numbers"></div>
+   
+<!-- div vuota dove verr&agrave; visualizzato il numero casuale generato -->
+   
+<script>
+        // Funzione per generare un numero casuale tra 1 e 100         function getRandomNumber() {             return Math.floor(Math.random() * 100) + 1;         }         /*         La funzione `getRandomNumber` genera un numero casuale tra 1 e 100.         Utilizza `Math.random()` per ottenere un numero decimale casuale tra 0 e 1,         lo moltiplica per 100 per estenderlo all'intervallo [0, 100) e lo arrotonda per difetto con `Math.floor()`.         Aggiungendo 1, otteniamo un valore tra 1 e 100 inclusi.         */         // Funzione per aggiornare il contenuto della pagina con il numero casuale         function updateNumbers() {             const numbersDiv = document.getElementById('numbers');             // Ottiene la div in cui visualizzare il numero casuale             const randomNumber = getRandomNumber();             // Genera un numero casuale chiamando la funzione getRandomNumber             numbersDiv.textContent = `Numero Casuale: ${randomNumber}`;             // Aggiorna il contenuto della div con il numero casuale generato         }         // Aggiunge un event listener al pulsante per rilevare il click         document.getElementById('generate-button').addEventListener('click', updateNumbers);         /*         Quando il pulsante con ID "generate-button" viene cliccato,         viene eseguita la funzione `updateNumbers`, che aggiorna la pagina con un nuovo numero casuale.         */    
+</script>
+
+</!-->
+
+</!-->
+</!-->
+</body>
+</!-->
+</!-->
+</head>
+</!-->
+</html>
