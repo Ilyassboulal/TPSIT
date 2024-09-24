@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore di Numeri Casuali</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #numbers {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        #generate-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .box {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #000;
+            display: inline-block;
+            font-size: 18px;
+            text-align: center;
+            width: 100px;
+            margin: 0 auto;
+        }
+        .difference-box {
+            background-color: #d3d3d3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generatore di Numeri Casuali</h1>
+    <button id="generate-button">Genera Numero Casuale</button>
+    <div id="numbers"></div>
+    <div id="even-or-odd" class="box"></div>
+    <div id="prime-status" class="box"></div>
+    <div id="second-number" class="box"></div>
+    <div id="second-even-or-odd" class="box"></div>
+    <div id="second-prime-status" class="box"></div>
+    <div id="difference" class="box difference-box"></div>
+
+    <script>
+        // Funzione per generare un numero casuale tra 1 e 100
+        function getRandomNumber() {
+            return Math.floor(Math.random() * 100) + 1;
+        }
+
+        // Funzione per determinare se un numero è pari o dispari
+        function isEvenOrOdd(number) {
+            return number % 2 === 0 ? 'pari' : 'dispari';
+        }
+
+        // Funzione per controllare se un numero è primo
+        function isPrime(num) {
+            if (num <= 1) return false; // 0 e 1 non sono primi
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) return false; // Divisibile per un numero diverso da 1 e se stesso
+            }
+            return true; // È primo
+        }
+
+        // Funzione per aggiornare il contenuto della pagina con i numeri casuali
+        function updateNumbers() {
+            const firstNumber = getRandomNumber();
+            const secondNumber = getRandomNumber();
+
+            document.getElementById('numbers').textContent = `Primo Numero: ${firstNumber}`;
+            document.getElementById('even-or-odd').textContent = isEvenOrOdd(firstNumber);
+            document.getElementById('prime-status').textContent = isPrime(firstNumber) ? 'primo' : 'non primo';
+
+            document.getElementById('second-number').textContent = `Secondo Numero: ${secondNumber}`;
+            document.getElementById('second-even-or-odd').textContent = isEvenOrOdd(secondNumber);
+            document.getElementById('second-prime-status').textContent = isPrime(secondNumber) ? 'primo' : 'non primo';
+
+            const difference = Math.abs(firstNumber - secondNumber);
+            document.getElementById('difference').textContent = `Differenza: ${difference}`;
+        }
+
+        // Aggiungi un listener al pulsante per generare un numero casuale quando viene cliccato
+        document.getElementById('generate-button').addEventListener('click', updateNumbers);
+    </script>
+</body>
+</html>
