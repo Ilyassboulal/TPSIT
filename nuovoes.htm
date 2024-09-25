@@ -1,42 +1,28 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Array in Box Div</title>
-    <style>
-        /* Stile per i div con classe 'box' */
-        .box {
-            border: 1px solid red; /* Bordo rosso */
-            padding: 10px; /* Spaziatura interna */
-            margin: 5px; /* Margine esterno */
-            display: inline-block; /* Visualizzazione in linea */
+function isPrime(num) {
+    if (num <= 1) return false;
+    if (num <= 3) return true;
+    if (num % 2 === 0 || num % 3 === 0) return false;
+    for (let i = 5; i * i <= num; i += 6) {
+        if (num % i === 0 || num % (i + 2) === 0) return false;
+    }
+    return true;
+}
+
+function generatePrimes(n) {
+    const primes = [];
+    let num = 2; // Il primo numero primo
+
+    while (primes.length < n) {
+        if (isPrime(num)) {
+            primes.push(num);
         }
-    </style>
-</head>
-<body>
+        num++;
+    }
 
-    <div id="container">
-        <!-- Contenitore per i div generati -->
-        esempio di stampa di un array in quadrati div nell'html
-    </div>
+    return primes;
+}
 
-    <script>
-        // Funzione per stampare gli elementi di un array in div
-        function printArrayInDivs(arr) {
-            const container = document.getElementById('container'); // Seleziona il contenitore
-
-            arr.forEach(element => {
-                const div = document.createElement('div'); // Crea un nuovo div
-                div.classList.add('box'); // Aggiunge la classe 'box' al div
-                div.textContent = element; // Imposta il contenuto del div
-                container.appendChild(div); // Aggiunge il div al contenitore
-            });
-        }
-
-        // Esempio di utilizzo
-        const myArray = [1, 2, 3, 4, 5, "ciao", "test"]; // Array precompilato
-        printArrayInDivs(myArray); // Chiama la funzione con l'array
-    </script>
-</body>
-</html>
+// Esempio di utilizzo
+const n = 10;  // Numero di numeri primi da trovare
+const primeNumbers = generatePrimes(n);
+console.log(primeNumbers);  // Output: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
