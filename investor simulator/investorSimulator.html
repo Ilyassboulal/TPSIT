@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulatore di Investimenti</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="game-container">
+    <h1>Simulatore di Investimenti</h1>
+    <div id="player-name">
+      <label for="name">Inserisci il tuo nome: </label>
+      <input type="text" id="name" placeholder="Il tuo nome" oninput="updatePlayerName()">
+      <p id="player-greeting">Benvenuto, Giocatore!</p>
+    </div>
+
+    <div id="stats">
+      <p>💰 Saldo: <span id="cash">1000</span></p>
+      <p>📈 Valore del Portafoglio: <span id="portfolio">0</span></p>
+    </div>
+
+    <div id="market">
+      <h2>Mercato</h2>
+      <div class="asset">
+        <p>🛢️ Petrolio - Prezzo: <span class="price" id="oil-price">50</span></p>
+        <button onclick="buy('oil')">Compra</button>
+        <button onclick="sell('oil')">Vendi</button>
+        <button onclick="sellAll('oil')">Vendi Tutto</button>
+      </div>
+      <div class="asset">
+        <p>💻 Azioni Tech - Prezzo: <span class="price" id="tech-price">100</span></p>
+        <button onclick="buy('tech')">Compra</button>
+        <button onclick="sell('tech')">Vendi</button>
+        <button onclick="sellAll('tech')">Vendi Tutto</button>
+      </div>
+      <div class="asset">
+        <p>💰 Bitcoin - Prezzo: <span class="price" id="bitcoin-price">20000</span></p>
+        <button onclick="buy('bitcoin')">Compra</button>
+        <button onclick="sell('bitcoin')">Vendi</button>
+        <button onclick="sellAll('bitcoin')">Vendi Tutto</button>
+      </div>
+      <div class="asset">
+        <p>💎 Ethereum - Prezzo: <span class="price" id="ethereum-price">1500</span></p>
+        <button onclick="buy('ethereum')">Compra</button>
+        <button onclick="sell('ethereum')">Vendi</button>
+        <button onclick="sellAll('ethereum')">Vendi Tutto</button>
+      </div>
+      <div class="asset">
+        <p>🏅 Oro - Prezzo: <span class="price" id="gold-price">1500</span></p>
+        <button onclick="buy('gold')">Compra</button>
+        <button onclick="sell('gold')">Vendi</button>
+        <button onclick="sellAll('gold')">Vendi Tutto</button>
+      </div>
+      <div class="asset">
+        <p>🏡 Immobili - Prezzo: <span class="price" id="real-estate-price">500000</span></p>
+        <button onclick="buy('real-estate')">Compra</button>
+        <button onclick="sell('real-estate')">Vendi</button>
+        <button onclick="sellAll('real-estate')">Vendi Tutto</button>
+      </div>
+    </div>
+
+    <div id="my-assets">
+      <h2>I tuoi Investimenti</h2>
+      <ul id="assets-list"></ul>
+    </div>
+
+    <div id="events">
+      <h2>Eventi di Mercato</h2>
+      <p id="event-log">Benvenuto nel mercato!</p>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
