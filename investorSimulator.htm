@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulatore di Investimenti</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        #game-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 2px solid #ccc;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        #stats, #market, #events, #my-assets {
+            margin-bottom: 20px;
+        }
+        .asset {
+            margin: 10px 0;
+            padding: 5px;
+        }
+        button {
+            margin-left: 5px;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #player-name input {
+            padding: 5px;
+            font-size: 16px;
+        }
+        #my-assets ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #my-assets li {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>Simulatore di Investimenti</h1>
+        <div id="player-name">
+            <label for="name">Inserisci il tuo nome: </label>
+            <input type="text" id="name" placeholder="Il tuo nome" oninput="updatePlayerName()">
+            <p id="player-greeting">Benvenuto, Giocatore!</p>
+        </div>
+        <div id="stats">
+            <p>💰 Saldo: <span id="cash">1000</span></p>
+            <p>📈 Valore del Portafoglio: <span id="portfolio">0</span></p>
+        </div>
+        <div id="market">
+            <h2>Mercato</h2>
+            <div class="asset">
+                <p>🛢️ Petrolio - Prezzo: <span class="price" id="oil-price">50</span></p>
+                <button onclick="buy('oil')">Compra</button>
+                <button onclick="sell('oil')">Vendi</button>
+                <button onclick="sellAll('oil')">Vendi Tutto</button>
+            </div>
+            <div class="asset">
+                <p>💻 Azioni Tech - Prezzo: <span class="price" id="tech-price">100</span></p>
+                <button onclick="buy('tech')">Compra</button>
+                <button onclick="sell('tech')">Vendi</button>
+                <button onclick="sellAll('tech')">Vendi Tutto</button>
+            </div>
+            <div class="asset">
+                <p>💰 Bitcoin - Prezzo: <span class="price" id="bitcoin-price">20000</span></p>
+                <button onclick="buy('bitcoin')">Compra</button>
+                <button onclick="sell('bitcoin')">Vendi</button>
+                <button onclick="sellAll('bitcoin')">Vendi Tutto</button>
+            </div>
+            <div class="asset">
+                <p>💎 Ethereum - Prezzo: <span class="price" id="ethereum-price">1500</span></p>
+                <button onclick="buy('ethereum')">Compra</button>
+                <button onclick="sell('ethereum')">Vendi</button>
+                <button onclick="sellAll('ethereum')">Vendi Tutto</button>
+            </div>
+            <div class="asset">
+                <p>🏅 Oro - Prezzo: <span class="price" id="gold-price">1500</span></p>
+                <button onclick="buy('gold')">Compra</button>
+                <button onclick="sell('gold')">Vendi</button>
+                <button onclick="sellAll('gold')">Vendi Tutto</button>
+            </div>
+            <div class="asset">
+                <p>🏡 Immobili - Prezzo: <span class="price" id="real-estate-price">500000</span></p>
+                <button onclick="buy('real-estate')">Compra</button>
+                <button onclick="sell('real-estate')">Vendi</button>
+                <button onclick="sellAll('real-estate')">Vendi Tutto</button>
+            </div>
+        </div>
+        <div id="my-assets">
+            <h2>I tuoi Investimenti</h2>
+            <ul id="assets-list"></ul>
+        </div>
+        <div id="events">
+            <h2>Eventi di Mercato</h2>
+            <p id="event-log">Benvenuto nel mercato!</p>
+        </div>
+    </div>
+    <script>
+        let cash = 1000;
+        let portfolio = { oil: 0, tech: 0, bitcoin: 0, ethereum: 0, gold: 0, "real-estate": 0 };
+        let prices = { oil: 50, tech: 100, bitcoin: 20000, ethereum: 1500, gold: 1500, "real-estate": 500000 };
+        let playerName = "Giocatore";
+
+        function updateUI() {
+            document.getElementById('cash').textContent = cash;
+            document.getElementById('portfolio').textContent = calculatePortfolioValue();
+            for (let asset in prices) {
+                document.getElementById(`${asset}-price`).textContent = prices[asset];
+            }
+            updateAssetList();
+        }
+        function updatePlayerName() {
+            playerName = document.getElementById('name').value || "Giocatore";
+            document.getElementById('player-greeting').textContent = `Benvenuto, ${playerName}!`;
+        }
+        function updateAssetList() {
+            const assetsList = document.getElementById('assets-list');
+            assetsList.innerHTML = "";
+            for (let asset in portfolio) {
+                if (portfolio[asset] > 0) {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${capitalize(asset)}: ${portfolio[asset]} unità - Valore: €${portfolio[asset] * prices[asset]}`;
+                    assetsList.appendChild(listItem);
+                }
+            }
+        }
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1).replace('-', ' ');
+        }
+        function calculatePortfolioValue() {
+            return Object.keys(portfolio).reduce((total, asset) => total + portfolio[asset] * prices[asset], 0);
+        }
+        function buy(asset) {
+            if (cash >= prices[asset]) {
+                cash -= prices[asset];
+                portfolio[asset]++;
+                logEvent(`Acquistato 1 unità di ${asset}.`);
+                updateUI();
+            } else {
+                logEvent("Non hai abbastanza denaro!");
+            }
+        }
+        function sell(asset) {
+            if (portfolio[asset] > 0) {
+                cash += prices[asset];
+                portfolio[asset]--;
+                logEvent(`Venduto 1 unità di ${asset}.`);
+                updateUI();
+            } else {
+                logEvent(`Non possiedi ${asset} da vendere.`);
+            }
+        }
+        function sellAll(asset) {
+            if (portfolio[asset] > 0) {
+                cash += portfolio[asset] * prices[asset];
+                portfolio[asset] = 0;
+                logEvent(`Venduto tutte le unità di ${asset}.`);
+                updateUI();
+            } else {
+                logEvent(`Non possiedi ${asset} da vendere.`);
+            }
+        }
+        function logEvent(message) {
+            document.getElementById('event-log').textContent = message;
+        }
+        function marketEvent() {
+            const events = [
+                { message: "Bitcoin schizza in alto!", change: { bitcoin: 1000 } },
+                { message: "Azioni tech crollano!", change: { tech: -50 } },
+                { message: "Petrolio aumenta di valore.", change: { oil: 30 } },
+            ];
+            const randomEvent = events[Math.floor(Math.random() * events.length)];
+            for (let asset in randomEvent.change) {
+                prices[asset] = Math.max(prices[asset] + randomEvent.change[asset], 0);
+            }
+            logEvent(randomEvent.message);
+            updateUI();
+        }
+        setInterval(marketEvent, 7000);
+        updateUI();
+    </script>
+</body>
+</html>
